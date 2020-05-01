@@ -1,0 +1,24 @@
+- name: mkdir the /home/ubuntu/couchdb/slave/data
+  become: yes
+  file:
+    path: /home/ubuntu/couchdb/slave/data
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+- name: Restart docker service
+  raw: sudo systemctl daemon-reload; sudo systemctl restart docker
+  
+- name: Configure compose
+  become: yes
+  template:
+    src: docker-compose.yaml.j2
+    dest: /home/ubuntu/couchdb/slave/docker-compose.yaml
+
+- name: run Couchdb_slave1
+  raw: cd /home/ubuntu/couchdb/slave/; docker-compose up -d
+  
+- name: run cluster1.sh
+  shell: |
+    echo "== Add node to cluster =="
+    curl -X POST -H "Content-Type: application/json" http://user:123@172.26.132.80:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "user", "password":"123", "port": 5984, "node_count": "3", "remote_node": "172.26.131.46", "remote_current_user": "user", "remote_current_password": "123" }'
+    curl -X POST -H "Content-Type: application/json" http://user:123@172.26.132.80:5984/_cluster_setup -d '{"action": "add_node", "host":"172.26.131.46", "port": 5984, "username": "user", "password":"123"}'
