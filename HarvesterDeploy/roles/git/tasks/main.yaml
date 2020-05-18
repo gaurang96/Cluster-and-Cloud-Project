@@ -1,0 +1,29 @@
+---
+# Cloning git repository
+- copy: 
+    src: ~/.ssh/id_rsa.pub 
+    dest: /home/ubuntu/.ssh
+
+- copy: 
+    src: ~/.ssh/id_rsa
+    dest: /home/ubuntu/.ssh
+
+- copy: 
+    src: ~/.ssh/config
+    dest: /home/ubuntu/.ssh
+
+
+- git:
+    repo: git@github.com:gaurang96/Cluster-and-Cloud-Project.git
+    dest: /home/ubuntu/project
+    key_file: /home/ubuntu/.ssh/id_rsa
+    accept_hostkey: yes
+  become: yes
+  
+
+
+
+
+
+
+

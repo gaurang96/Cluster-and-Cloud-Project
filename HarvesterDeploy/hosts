@@ -1,0 +1,5 @@
+[Couchdb_master]
+115.146.94.154 ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python
+
+[Couchdb_slave]
+115.146.95.195 ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python
