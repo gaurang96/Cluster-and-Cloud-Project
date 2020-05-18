@@ -4,10 +4,19 @@ from dash.dependencies import Input, Output
 import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
+import dash_table
 import couchdb
+from cloudant.client import Cloudant
+from cloudant import design_document
+import cloudant
 
-full_db = couchdb.Server("http://user:123@172.26.132.80:5984/")
-sample = full_db['jacks-db']
+serviceUsername = "user"
+servicePassword = "123"
+serviceURL = "http://user:123@172.26.132.80:5984/"
+
+client = Cloudant(serviceUsername, servicePassword, url=serviceURL)
+client.connect()
+
 server = flask.Flask(__name__)
 
 @server.route('/')
@@ -22,14 +31,25 @@ app = dash.Dash(
 )
 
 # App Functions 
-# accesses n values from the couch db
-def get_couch_data(n_rows):
+# accesses values from the couch db
+def get_aurin_data():
     rows = []
-    for key in range(0, n_rows):
-        row = html.Tr([html.Td(key), html.Td(sample[str(key)]['vals'])])
-        rows.append(row)
+    r_dict = {}
+    aurinView = cloudant.view.View(design_document.DesignDocument(client['aurin'], document_id='view'), 'myview')
+    
+    # purely gets values only from this section of the view
+    for doc in aurinView.result:
+        if doc['key'] == 'djsb_salm_smoothed_unemployment_lga_2010_18.24600':
+            r_dict = doc['value']['props']
 
-    return rows
+    r_dict.pop('lga_code18', None)
+    r_dict.pop('lga_name18', None)
+    l_dicts = []
+    for key in r_dict.keys():
+        kd = {'idx': key, 'Year': int(key[4:]), 'Month': key[:3], 'Value' : r_dict[key]}
+        l_dicts.append(kd)
+    
+    return l_dicts
 
 # Callbacks
 
@@ -37,16 +57,25 @@ def get_couch_data(n_rows):
 # output 'collected data' as table
 # input "go-click" as button_click
 @app.callback(
-    Output('couch-table', 'children'),
+    Output('aurin-table', 'data'),
     [Input( 'go-val', 'n_clicks')])
 
 def get_data(n_clicks):
+    data = [{'idx' : 0, 'Year' : 0 , 'Month' : 0, 'Value' : 0}]
     if n_clicks > 0:
-        table_body = [html.Tbody(get_couch_data(20))]
-        table_header = [html.Thead(html.Tr([html.Th("Key"), html.Th("Value")]))]
+        data = get_aurin_data()
 
-    return table_header + table_body
+    return data
 
+
+#layout atts
+
+style_cell = {'height': 'auto', 'textAlign' : 'center'}
+style_table = {'width' : '800px', 'height': '400px', 'overflowY': 'auto', 'overflowX' : 'none'}
+t_cols = [{'name': i, 'id': i } for i in ['idx', 'Year', 'Month', 'Value']]
+t_data = [{'idx' : 0, 'Year' : 0 , 'Month' : 0, 'Value' : 0}]
+
+# app layout
 
 app.layout = html.Div(
     children=[
@@ -81,10 +110,9 @@ app.layout = html.Div(
                     [   
                         html.Div(children = "this is the visualisation column"),
                         html.Div(children = "this is a table"),
-                        html.Div(children = ""),
-                        html.Div(children = ""),
+
                         # Callback Output
-                        dbc.Table(id = 'couch-table', bordered=True),
+                        dash_table.DataTable(id = 'aurin-table', columns = t_cols,  data = t_data, style_table = style_table, style_cell = style_cell)
                     ],
                     width = 9
                 ) 
