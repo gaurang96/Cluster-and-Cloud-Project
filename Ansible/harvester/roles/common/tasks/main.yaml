@@ -1,0 +1,28 @@
+
+- name: Install python3
+  become: yes
+  apt:
+    name: ['python3']
+    state: latest
+    update_cache: yes
+    
+- name: Install python3-pip
+  become: yes
+  apt:
+    name: ['python3-pip']
+    state: latest
+    update_cache: yes  
+
+- name: Install couchDB
+  raw: pip3 install couchdb
+
+ 
+- name: Install vaderSentiment
+  raw: pip3 install vaderSentiment
+    
+- name: Install pathlib
+  raw: pip3 install pathlib
+  
+- name: Install tweepy   
+  raw: pip3 install tweepy
+ 

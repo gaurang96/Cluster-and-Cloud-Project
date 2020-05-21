@@ -1,0 +1,18 @@
+- hosts: Couchdb_master
+  gather_facts: false
+
+  roles:
+    - master
+
+- hosts: Couchdb_slave1
+  gather_facts: false
+
+  roles:
+    - slave1
+
+- hosts: Couchdb_slave2
+  gather_facts: false
+
+  roles:
+    - slave2
+   

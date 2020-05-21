@@ -1,0 +1,11 @@
+[Couchdb_master]
+172.26.131.196 ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
+
+[Couchdb_slave1]
+172.26.130.242 ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
+
+[Couchdb_slave2]
+172.26.130.223 ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
+
+[webservice]
+172.26.134.44 ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
