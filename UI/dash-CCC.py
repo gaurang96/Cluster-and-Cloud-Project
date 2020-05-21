@@ -6,7 +6,6 @@ import dash_bootstrap_components as dbc
 # App setup
 external_stylesheets = [dbc.themes.BOOTSTRAP]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-host = "http://enter-address/"
 
 # Data Pipeline (TBD)
 Data = None

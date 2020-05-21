@@ -109,7 +109,7 @@ app.layout = html.Div(
                 dbc.Col(
                     [   
                         html.Div(children = "this is the visualisation column"),
-                        html.Div(children = "this is a table"),
+                        html.Div(children = "Table will show the "),
 
                         # Callback Output
                         dash_table.DataTable(id = 'aurin-table', columns = t_cols,  data = t_data, style_table = style_table, style_cell = style_cell)
@@ -124,4 +124,4 @@ app.layout = html.Div(
 
 # deploy
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
