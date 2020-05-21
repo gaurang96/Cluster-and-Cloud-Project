@@ -10,12 +10,12 @@ from cloudant.client import Cloudant
 from cloudant import design_document
 import cloudant
 
-serviceUsername = "user"
+'''serviceUsername = "user"
 servicePassword = "123"
 serviceURL = "http://user:123@172.26.132.80:5984/"
 
 client = Cloudant(serviceUsername, servicePassword, url=serviceURL)
-client.connect()
+client.connect()'''
 
 server = flask.Flask(__name__)
 
@@ -32,10 +32,10 @@ app = dash.Dash(
 
 # App Functions 
 # accesses values from the couch db
-def get_aurin_data():
+'''def get_aurin_data():
     rows = []
     r_dict = {}
-    aurinView = cloudant.view.View(design_document.DesignDocument(client['aurin'], document_id='view'), 'myview')
+    aurinView = cloudant.view.View(cloudant.design_document.DesignDocument(client['aurin'], document_id='view'), 'myview')
     
     # purely gets values only from this section of the view
     for doc in aurinView.result:
@@ -49,7 +49,7 @@ def get_aurin_data():
         kd = {'idx': key, 'Year': int(key[4:]), 'Month': key[:3], 'Value' : r_dict[key]}
         l_dicts.append(kd)
     
-    return l_dicts
+    return l_dicts'''
 
 # Callbacks
 
@@ -63,7 +63,7 @@ def get_aurin_data():
 def get_data(n_clicks):
     data = [{'idx' : 0, 'Year' : 0 , 'Month' : 0, 'Value' : 0}]
     if n_clicks > 0:
-        data = get_aurin_data()
+        data = [{'idx' : 1, 'Year' : 1 , 'Month' : 1, 'Value' : 1}]
 
     return data
 
@@ -124,4 +124,4 @@ app.layout = html.Div(
 
 # deploy
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
