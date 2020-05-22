@@ -31,7 +31,7 @@ def get_historic_tweets_2018():
 if __name__ == '__main__':
     p1= Process(target=get_historic_tweets_2018)
     p1.start()
-    time.sleep(30)
+    time.sleep(500)
     p1.terminate()    
     process_data.get_historic_condensed()
     couch_db.add_to_DB("historic_dbdata.json")
