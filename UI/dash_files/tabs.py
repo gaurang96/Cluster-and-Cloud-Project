@@ -1,6 +1,7 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_table
+import os
 
 # tab formats
 tab_styles = {'width' : '250px'}
@@ -38,7 +39,7 @@ def get_tab1():
 
 # composition of tab 2
 def get_tab2():
-	body = html.Div("Tweets Summary", style = tab_offsets)
+	body = html.Div(children = ["Tweets Summary", html.Div(id = 'test', children = "data should be posted here")], style = tab_offsets)
 	return body
 
 

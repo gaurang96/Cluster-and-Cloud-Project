@@ -2,7 +2,7 @@ import flask
 import dash
 import layout
 import callbacks
-import tabs
+import route_funcs
 
 # flask server
 server = flask.Flask(__name__)
@@ -13,15 +13,24 @@ app = dash.Dash(
     external_stylesheets = layout.get_stylesheet()
 )
 
-
+# set the layout 
 app.layout = layout.get_layout()
 
-callbacks.reg_table_callback(app)
-# main dashboard
+# invoke callbacks 
+callbacks.table_callback(app, 'go-val', 'n_clicks', 'aurin-table', 'data')
+
+callbacks.test_callback(app)
 
 @server.route('/')
 def index():
-    return 'Hello Flask app'
+    return "Hello World"
+
+@server.route('/api/test_data', methods=['GET'])
+def connect():
+	return route_funcs.dump_data()
+#@atexit.register
+#def shutdown():
+#  database.disconnect()
 
 if __name__ == '__main__':
     app.run_server(debug=True)
