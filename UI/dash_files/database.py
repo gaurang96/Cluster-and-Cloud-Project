@@ -4,7 +4,7 @@ import couchdb
 class database:
 	def __init__(self, ip, user, pw):
 		self.ip = ip
-		self.client = cloudant.client.Cloudant(user, pw, "http://{}:{}@{}}/".format(user, pw, self.ip))
+		self.client = cloudant.client.Cloudant(user, pw, "http://{}:{}@{}/".format(user, pw, self.ip))
 
 	def connect(self):
 		self.client.connect()
@@ -14,7 +14,6 @@ class database:
 
 	def disconnect(self):
 		self.client.disconnect()
-
 
 
 try:

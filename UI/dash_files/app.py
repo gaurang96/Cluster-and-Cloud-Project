@@ -9,7 +9,7 @@ import database
 ip = ""
 user = ""
 pw = ""
-db = database.database(ip, user, pw)
+#db = database.database(ip, user, pw)
 
 # app and server
 server = flask.Flask(__name__)
