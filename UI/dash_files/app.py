@@ -3,8 +3,15 @@ import dash
 import layout
 import callbacks
 import route_funcs
+import database
 
-# flask server
+# data stores
+ip = ""
+user = ""
+pw = ""
+#db = database.database(ip, user, pw)
+
+# app and server
 server = flask.Flask(__name__)
 app = dash.Dash(
     __name__,
@@ -12,8 +19,6 @@ app = dash.Dash(
     routes_pathname_prefix='/app/',
     external_stylesheets = layout.get_stylesheet()
 )
-
-# set the layout 
 app.layout = layout.get_layout()
 
 # invoke callbacks 
@@ -28,6 +33,14 @@ def index():
 @server.route('/api/test_data', methods=['GET'])
 def connect():
 	return route_funcs.dump_data()
+
+#@server.route('/api/aurin', methods=['GET'])
+#def connect(db):
+#	return route_funcs.dump_aurin()
+
+#@server.route('/api/twitter', methods=['GET'])
+#def connect(db):
+#	return route_funcs.dump_twitter()
 
 #@atexit.register
 #def shutdown():

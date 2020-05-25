@@ -16,7 +16,6 @@ class database:
 	def disconnect(self):
 		self.client.disconnect()
 
-
-
 db = database('172.26.134.13:5984', 'admin', '123')
 db.connect()
+
