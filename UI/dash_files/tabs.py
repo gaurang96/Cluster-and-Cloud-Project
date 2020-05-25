@@ -1,15 +1,17 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
+import dash_core_components as dcc
+
 import dash_table
 import os
 
 # tab formats
-tab_styles = {'width' : '250px'}
+tab_styles = {'width' : "25vh"}
 tab_offsets = {'padding-left' : '20px', 'padding-top': '20px'}
 
 # to return to layout body
 def get_tabs():
-	return dbc.Row(
+	return dbc.Col(
 		[
 			dbc.Tabs(
 			    [
@@ -20,7 +22,8 @@ def get_tabs():
 			    ]
 		    )
     	], 
-    	style = {'padding-left' : "15px"}
+    	style = {'padding-left' : "15px"},
+    	width = 10
     )
 
 
@@ -39,7 +42,8 @@ def get_tab1():
 
 # composition of tab 2
 def get_tab2():
-	body = html.Div(children = ["Tweets Summary", html.Div(id = 'test', children = "data should be posted here")], style = tab_offsets)
+	graph = dcc.Graph(id = 'twitter_graph', style = {'height': "75vh", 'width': "100vh"})
+	body = html.Div(children = ["Tweets Summary", html.Div(id = 'test', children = "data should be posted here"), graph], style = tab_offsets)
 	return body
 
 

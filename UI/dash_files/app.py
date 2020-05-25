@@ -18,7 +18,7 @@ app.layout = layout.get_layout()
 
 # invoke callbacks 
 callbacks.table_callback(app, 'go-val', 'n_clicks', 'aurin-table', 'data')
-
+callbacks.graph_callback(app, 'go-val', 'n_clicks', 'twitter_graph')
 callbacks.test_callback(app)
 
 @server.route('/')
@@ -28,6 +28,7 @@ def index():
 @server.route('/api/test_data', methods=['GET'])
 def connect():
 	return route_funcs.dump_data()
+
 #@atexit.register
 #def shutdown():
 #  database.disconnect()
