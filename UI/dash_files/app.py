@@ -1,4 +1,5 @@
 import flask
+import atexit
 import dash
 import layout
 import callbacks
@@ -10,7 +11,7 @@ ip = "172.26.132.96:5984/"
 user = "admin"
 pw = "123"
 db = database.database(ip, user, pw)
-
+db.connect()
 # app and server
 server = flask.Flask(__name__)
 app = dash.Dash(
@@ -22,8 +23,8 @@ app = dash.Dash(
 app.layout = layout.get_layout()
 
 # invoke callbacks 
-callbacks.table_callback(app, 'go-val', 'n_clicks', 'aurin-table', 'data')
-callbacks.twitter_graph(app, 'go-val', 'n_clicks', 'twitter_graph')
+callbacks.table_callback(app, 'a-val', 'n_clicks', 'aurin-table', 'data')
+callbacks.twitter_graph(app, 't-val', 'n_clicks', 'twitter_graph')
 
 @server.route('/')
 def index():
@@ -37,9 +38,9 @@ def connect_aurin(db = db):
 def connect_twitter(db = db):
 	return route_funcs.dump_twitter(db)
 
-#@atexit.register
-#def shutdown():
-#  database.disconnect()
+@atexit.register
+def shutdown():
+  db.disconnect()
 
 if __name__ == '__main__':
     app.run_server(debug=True)

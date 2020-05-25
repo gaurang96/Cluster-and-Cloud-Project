@@ -4,6 +4,8 @@ import dash_bootstrap_components as dbc
 import dash_table
 import tabs
 
+context = "provide a brief summary of this webapp here."
+
 def get_title():
 	return dbc.Row(
             [
@@ -24,9 +26,10 @@ def get_sidePanel():
 	return dbc.Col(
                     [
                         # Callback Input
-                        html.Div(children = "click 'go' to get the data from couchdb", style = {'color': '#292F33'}),
-                        html.Button('Go', id='go-val', n_clicks=0),
-                        html.Div(children = "this column may also be used for short explanations.", style = {'color': '#292F33'})
+                        dbc.Row(children = "click 'go' to get the data from couchdb", style = {'color': '#292F33', 'padding-bottom': '10px', 'padding-left' : '10px'}),
+                        dbc.Row(dbc.Button('Get Aurin Data', color='primary', id='a-val', n_clicks=0), style = {'padding-bottom': '10px', 'padding-left' : '10px'}),
+                        dbc.Row(dbc.Button('Get Twitter Data', color='primary', id='t-val', n_clicks=0), style = {'padding-bottom': '10px', 'padding-left' : '10px'}),
+                        dbc.Row(html.Div(children = context, style = {'color': '#292F33', 'padding-bottom': '10px', 'padding-left' : '10px'}))
 
                     ],
                     width = 2,
