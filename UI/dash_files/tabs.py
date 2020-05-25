@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
-
+import graphs
 import dash_table
 import os
 
@@ -15,10 +15,10 @@ def get_tabs():
 		[
 			dbc.Tabs(
 			    [
-			        dbc.Tab(get_tab1(), label="Aurin", tab_style = tab_styles),
-			        dbc.Tab(get_tab2(), label="Twitter", tab_style = tab_styles),
-			        dbc.Tab(get_tab3(), label="Inferences", tab_style = tab_styles),
-			        dbc.Tab(get_tab4(), label="Credits", tab_style = tab_styles)
+			        dbc.Tab(get_tab1(), label="Positive Sentiment", tab_style = tab_styles),
+			        dbc.Tab(get_tab2(), label="Negative Sentivement", tab_style = tab_styles),
+			        dbc.Tab(get_tab3(), label="Cities by Negativity", tab_style = tab_styles),
+			        dbc.Tab(get_tab4(), label="Unemployment Trends", tab_style = tab_styles)
 			    ]
 		    )
     	], 
@@ -57,7 +57,11 @@ def get_tab3():
 
 # composition of tab 4
 def get_tab4():
-	body = html.Div("Group member details and credits", style = tab_offsets)
+	body = dbc.Col([
+		dcc.Graph(id = "unemployment-chart", style = {'height': "75vh", 'width': "100vh"})],
+		style = tab_offsets
+		)
+
 	return body
 
 

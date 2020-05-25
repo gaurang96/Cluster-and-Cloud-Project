@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 import dash_table
 import tabs
 
+
 context = "provide a brief summary of this webapp here."
 
 def get_title():
@@ -15,7 +16,7 @@ def get_title():
                         # Title
                         html.H1(children="Cluster and Cloud Computing Assignment 2", style = {'color': '#55ACEE'}),
                         # Subtitle
-                        html.Div(children= "Inferences Into Twitter Sentiment About Unemployment Caused by the Covid-19 Crisis", style = {'color': '#292F33'})
+                        html.Div(children= "Inferences Into Twitter Sentiment About Unemployment in relation to the Covid-19 Crisis", style = {'color': '#292F33'})
                     ]
                 )
             ],

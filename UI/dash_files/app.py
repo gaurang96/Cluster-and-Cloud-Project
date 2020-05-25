@@ -1,13 +1,14 @@
 import flask
 import atexit
 import dash
+import json
 import layout
 import callbacks
 import route_funcs
 import database
 
 # data stores
-ip = "172.26.132.96:5984/"
+ip = "172.26.132.96:5984"
 user = "admin"
 pw = "123"
 db = database.database(ip, user, pw)
@@ -23,24 +24,39 @@ app = dash.Dash(
 app.layout = layout.get_layout()
 
 # invoke callbacks 
-callbacks.table_callback(app, 'a-val', 'n_clicks', 'aurin-table', 'data')
-callbacks.twitter_graph(app, 't-val', 'n_clicks', 'twitter_graph')
+callbacks.unemp_callback(app, 't-val', 'n_clicks', 'unemployment-chart')
+
+def dump_data(database, idx):
+	view_data = database.collect_data(idx)
+	view_data.pop('_id', None)
+	view_data.pop('_rev', None)
+
+	return json.dumps(view_data)
 
 @server.route('/')
 def index():
     return "Hello World"
 
-@server.route('/api/aurin', methods=['GET'])
-def connect_aurin(db = db):
-	return route_funcs.dump_aurin(db)
+@server.route('/api/positive', methods=['GET'])
+def get_pos(db = db):
+	return dump_data(db, 0)
 
-@server.route('/api/twitter', methods=['GET'])
-def connect_twitter(db = db):
-	return route_funcs.dump_twitter(db)
+@server.route('/api/negative', methods=['GET'])
+def get_neg(db = db):
+	return dump_data(db, 1)
+
+@server.route('/api/trend', methods=['GET'])
+def get_trend(db = db):
+	return dump_data(db, 2)
+
+@server.route('/api/unemployment', methods=['GET'])
+def connect_unemployment(db = db):
+	return dump_data(db, 3)
 
 @atexit.register
 def shutdown():
   db.disconnect()
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

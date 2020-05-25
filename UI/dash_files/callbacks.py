@@ -18,15 +18,17 @@ def table_callback(app, in_id, in_type, out_id, out_type):
 	    return data
 
 # Update Graph
-def graph_callback(app, in_id, in_type, out_id, ):
+def unemp_callback(app, in_id, in_type, out_id):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
-		data = [{'x' : [1, 2, 3, 4], 'y': [1, 2, 3, 5], 'type': 'bar', 'name': 'group_A'}, {'x' : [1, 2, 3, 4], 'y': [1, 4, 9, 16], 'type': 'bar', 'name': 'group_B'}]
-		for i in range(0, len(data)):
-			for y in range(0, len(data[i]['y'])):
-				data[i]['y'][y] *= np.random.randint(1,20)
+		unemp = requests.get('http://127.0.0.1:8050/api/unemployment').json()
+		data = [{'x' : list(unemp['city'].values()), 'y': list(unemp['unemployment_rate'].values()), 'type' : 'bar'}]
+		layout = {'title': "Unemployment Rates"}
 
-		return {'data': data, 'layout':{'title': "Twitter Data Graph"}}
+		return {'data': data, 'layout': layout}
+
+def time_series(app, in_id, in_type, out_id):
+	return None
 
 # Update Graph
 def twitter_graph(app, in_id, in_type, out_id,):
@@ -36,11 +38,6 @@ def twitter_graph(app, in_id, in_type, out_id,):
 		if event > 0:
 			d_json = requests.get("http://127.0.0.1:8050/api/twitter").json()
 
-			data = [{'x' : d_json[d]['long'], 'y' : d_json[d]['lat'], 'mode': 'markers', 'name': d} for d in d_json][:1]
+			data = [{'x' : d_json[d]['long'], 'y' : d_json[d]['lat'], 'mode': 'markers', 'name': d} for d in d_json]
 		return {'data': data, 'layout':{'title': "Twitter Data Graph"}}
 
-def test_callback(app):
-	@app.callback(Output('test', 'children'), [Input('go-val', 'n_clicks')])
-	def test(n_clicks):
-		if n_clicks > 0:
-			return requests.get("http://127.0.0.1:8050/api/test_data").json()
