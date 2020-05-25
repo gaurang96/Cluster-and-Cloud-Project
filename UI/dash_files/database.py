@@ -10,12 +10,14 @@ class database:
 		self.client.connect()
 		print("client connected")
 
-	def collect_view(self, db, view_name, doc_id ='view'):
-		return cloudant.view.View(cloudant.design_document.DesignDocument(self.client[db], document_id=doc_id), view_name)
+	def collect_view(self, db, view_name, doc_id ='_design/view', group = False, gl = 0, skip = 0):
+		return (self.client[db].get_view_result(doc_id, view_name, raw_result=True,group=group, group_level=gl ,skip=skip))
 
 	def disconnect(self):
 		self.client.disconnect()
 
-db = database('172.26.134.13:5984', 'admin', '123')
+'''db = database('172.26.132.96:5984/', 'admin', '123')
 db.connect()
 
+out = db.collect_view('twitterdata', 'myview')
+'''

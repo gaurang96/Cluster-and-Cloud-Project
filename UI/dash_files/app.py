@@ -6,10 +6,10 @@ import route_funcs
 import database
 
 # data stores
-ip = ""
-user = ""
-pw = ""
-#db = database.database(ip, user, pw)
+ip = "172.26.132.96:5984/"
+user = "admin"
+pw = "123"
+db = database.database(ip, user, pw)
 
 # app and server
 server = flask.Flask(__name__)
@@ -23,24 +23,19 @@ app.layout = layout.get_layout()
 
 # invoke callbacks 
 callbacks.table_callback(app, 'go-val', 'n_clicks', 'aurin-table', 'data')
-callbacks.graph_callback(app, 'go-val', 'n_clicks', 'twitter_graph')
-callbacks.test_callback(app)
+callbacks.twitter_graph(app, 'go-val', 'n_clicks', 'twitter_graph')
 
 @server.route('/')
 def index():
     return "Hello World"
 
-@server.route('/api/test_data', methods=['GET'])
-def connect():
-	return route_funcs.dump_data()
+@server.route('/api/aurin', methods=['GET'])
+def connect_aurin(db = db):
+	return route_funcs.dump_aurin(db)
 
-#@server.route('/api/aurin', methods=['GET'])
-#def connect(db):
-#	return route_funcs.dump_aurin()
-
-#@server.route('/api/twitter', methods=['GET'])
-#def connect(db):
-#	return route_funcs.dump_twitter()
+@server.route('/api/twitter', methods=['GET'])
+def connect_twitter(db = db):
+	return route_funcs.dump_twitter(db)
 
 #@atexit.register
 #def shutdown():

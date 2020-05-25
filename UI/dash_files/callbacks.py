@@ -28,6 +28,16 @@ def graph_callback(app, in_id, in_type, out_id, ):
 
 		return {'data': data, 'layout':{'title': "Twitter Data Graph"}}
 
+# Update Graph
+def twitter_graph(app, in_id, in_type, out_id,):
+	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
+	def graph_update(event):
+		data = [{'x': [], 'y' : []}]
+		if event > 0:
+			d_json = requests.get("http://127.0.0.1:8050/api/twitter").json()
+
+			data = [{'x' : d_json[d]['long'], 'y' : d_json[d]['lat'], 'mode': 'markers', 'name': d} for d in d_json][:1]
+		return {'data': data, 'layout':{'title': "Twitter Data Graph"}}
 
 def test_callback(app):
 	@app.callback(Output('test', 'children'), [Input('go-val', 'n_clicks')])
