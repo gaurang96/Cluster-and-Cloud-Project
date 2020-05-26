@@ -1,0 +1,29 @@
+- pip3:
+    name: dash==1.12.0
+    
+- pip3:
+    name: dash_core_components==1.10.0
+    
+ - pip3:
+    name: dash_html_components==1.0.3
+
+- pip3:
+    name: dash_renderer==1.4.1
+
+- pip3:
+    name: dash_table==4.7.0
+
+- pip3:
+    name: dash_bootstrap_components==0.10.0
+    
+- pip3:
+    name: plotly==4.7.1
+
+- pip3:
+    name: flask==1.1.2   
+
+- pip3:
+    name: cloudant==2.13.0  
+
+- pip3:
+    name: requests==2.18.4  

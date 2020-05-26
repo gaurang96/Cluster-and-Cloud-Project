@@ -1,0 +1,22 @@
+- name: mkdir the /home/ubuntu/couchdb/master/data
+  file:
+    path: /home/ubuntu/couchdb/master/data
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    
+
+- name: Restart docker service
+  raw: sudo systemctl daemon-reload; sudo systemctl restart docker
+  
+- name: Configure compose
+  become: yes
+  template:
+    src: docker-compose.yaml.j2
+    dest: /home/ubuntu/couchdb/master/docker-compose.yaml
+
+- name: run Couchdb_master
+  raw: cd /home/ubuntu/couchdb/master/; sudo systemctl daemon-reload; sudo docker-compose up -d
+
+
+ 
