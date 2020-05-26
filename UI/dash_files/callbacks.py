@@ -4,9 +4,11 @@ import requests
 
 # callback for each interactive function
 #requests are used to interact with the GET calls from the api
+host ='127.0.0.1' # '172.26.134.13'
+port = '8050' #'3000
 
 # Update Graph
-def unemp_callback(app, in_id, in_type, out_id, host, port):
+def unemp_callback(app, in_id, in_type, out_id):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
@@ -19,7 +21,7 @@ def unemp_callback(app, in_id, in_type, out_id, host, port):
 			
 		return {'data': data, 'layout': layout}
 
-def trend_callback(app, in_id, in_type, out_id, host, port):
+def trend_callback(app, in_id, in_type, out_id):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
@@ -32,7 +34,7 @@ def trend_callback(app, in_id, in_type, out_id, host, port):
 
 		return {'data': data, 'layout': layout}
 
-def positive_callback(app, in_id, in_type, out_id, host, port, x = 25):
+def positive_callback(app, in_id, in_type, out_id, x = 25):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
@@ -48,7 +50,7 @@ def positive_callback(app, in_id, in_type, out_id, host, port, x = 25):
 		return {'data': data, 'layout': layout}
 
 
-def negative_callback(app, in_id, in_type, out_id, host, port, x = 25):
+def negative_callback(app, in_id, in_type, out_id, x = 25):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]

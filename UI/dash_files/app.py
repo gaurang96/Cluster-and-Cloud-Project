@@ -26,10 +26,10 @@ app = dash.Dash(
 app.layout = layout.get_layout()
 
 # invoke callbacks 
-callbacks.positive_callback(app, 't-val', 'n_clicks', 'positive-chart', host, port)
-callbacks.negative_callback(app, 't-val', 'n_clicks', 'negative-chart', host, port)
-callbacks.trend_callback(app, 't-val', 'n_clicks', 'trends-chart', host, port)
-callbacks.unemp_callback(app, 't-val', 'n_clicks', 'unemployment-chart', host, port)
+callbacks.positive_callback(app, 't-val', 'n_clicks', 'positive-chart')
+callbacks.negative_callback(app, 't-val', 'n_clicks', 'negative-chart')
+callbacks.trend_callback(app, 't-val', 'n_clicks', 'trends-chart')
+callbacks.unemp_callback(app, 't-val', 'n_clicks', 'unemployment-chart')
 
 
 def dump_data(database, idx):
@@ -41,11 +41,11 @@ def dump_data(database, idx):
 
 @server.route('/')
 def index():
-    return "Hello World"
+    return "Hello World!"
 
 @server.route('/api/')
 def api_home():
-    return "This is has been intentionally left blank"
+    return 'This page has been left intenionally blank.'
 
 @server.route('/api/positive', methods=['GET'])
 def get_pos(db = db):
@@ -69,4 +69,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run_server(port = port , host = host, debug=False)
+    app.run_server(debug=False)
