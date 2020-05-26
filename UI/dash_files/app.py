@@ -14,8 +14,6 @@ db = database.database(ip, user, pw)
 db.connect()
 
 # app and server
-host ='127.0.0.1' # '172.26.134.13'
-port = '8050' #'3000'
 server = flask.Flask(__name__)
 app = dash.Dash(
     __name__,
@@ -69,4 +67,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
