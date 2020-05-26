@@ -1,0 +1,25 @@
+#Twitter Data map Reduce functions
+# 3 Views were created for the tweets using 3 different functions MapReduce functions which are given below.
+
+----------------------------------------------------
+map=function (doc) {
+  if (doc.sentiment.compound > 0.05){
+  emit([doc.sentiment.compound, doc.location], 1);
+}
+}
+
+
+----------------------------------------------------
+map=function (doc) {
+  if (doc.sentiment.compound < -0.05){
+  emit([doc.sentiment.compound, doc.location], 1);
+}
+}
+
+----------------------------------------------------
+map=function (doc) {
+  if (doc.sentiment.compound > -0.05 && doc.sentiment.compound < 0.05){
+  emit([doc.sentiment.compound, doc.location], 1);
+}
+}
+----------------------------------------------------
