@@ -4,15 +4,18 @@ import requests
 
 # callback for each interactive function
 #requests are used to interact with the GET calls from the api
-host ='127.0.0.1' # '172.26.134.13'
-port = '8050' #'3000'
+
+# these need to replicate that of the server
+host ='127.0.0.1'
+port = '8050' 
 
 # Update Graph
 def unemp_callback(app, in_id, in_type, out_id):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Unemployment Rates", 'xaxis': {'title': 'Victoiran LGAs'}, 'yaxis': {'title': 'Unemployment Rate (%)'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
+		layout = {'title': "Unemployment Rates", 'xaxis': {'title': 'Victoiran LGAs'}, 'yaxis': {'title': 'Unemployment Rate (%)'}, 
+				  'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 
 		if event > 0:
 			unemp = requests.get('http://{}:{}/api/unemployment'.format(host, port)).json()
@@ -25,11 +28,13 @@ def trend_callback(app, in_id, in_type, out_id):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Change in Happiness Index", 'xaxis': {'title': 'Date'}, 'yaxis': {'title': 'Positve Tweets Difference'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
+		layout = {'title': "Change in Happiness Index", 'xaxis': {'title': 'Days from Today', 'autorange': 'reversed'}, 'yaxis': {'title': 'Positve Tweets Difference'},
+				  'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 		
 		if event > 0:
 			trends = requests.get('http://{}:{}/api/trend'.format(host, port)).json()
-			data = [{'x' : ['May-17','May-18','May-19','May-20','May-21','May-22','May-23','May-24','May-25'], 'y': list(trends['positive_neutral_negative'].values()),
+			data = [{'x' : ["{}".format(len(trends['positive_neutral_negative'])-i) for i in range(0, len(trends['positive_neutral_negative']) + 1)],
+					 'y': list(trends['positive_neutral_negative'].values()),
 					 'type' : 'line', 'marker' : {'color': '#55ACEE'}}]	
 
 		return {'data': data, 'layout': layout}
@@ -38,7 +43,8 @@ def positive_callback(app, in_id, in_type, out_id, x = 25):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Suburbs with the Most Positive Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
+		layout = {'title': "Suburbs with the Most Positive Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'},
+				  'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 
 		if event > 0:
 			pos = requests.get('http://{}:{}/api/positive'.format(host, port)).json()
@@ -54,7 +60,8 @@ def negative_callback(app, in_id, in_type, out_id, x = 25):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Suburbs with the Most Negative Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
+		layout = {'title': "Suburbs with the Most Negative Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'}, 
+				  'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 
 		if event > 0:
 			neg = requests.get('http://{}:{}/api/negative'.format(host, port)).json()
