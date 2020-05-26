@@ -5,7 +5,7 @@ import requests
 # callback for each interactive function
 #requests are used to interact with the GET calls from the api
 host ='127.0.0.1' # '172.26.134.13'
-port = '8050' #'3000
+port = '8050' #'3000'
 
 # Update Graph
 def unemp_callback(app, in_id, in_type, out_id):
@@ -54,7 +54,7 @@ def negative_callback(app, in_id, in_type, out_id, x = 25):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Suburbs with the Most Negatve Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
+		layout = {'title': "Suburbs with the Most Negative Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 
 		if event > 0:
 			neg = requests.get('http://{}:{}/api/negative'.format(host, port)).json()

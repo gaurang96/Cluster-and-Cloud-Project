@@ -14,7 +14,7 @@ def get_tabs():
 			dbc.Tabs(
 			    [
 			        dbc.Tab(get_tab1(), label="Positive Sentiment", tab_style = tab_styles),
-			        dbc.Tab(get_tab2(), label="Negative Sentivement", tab_style = tab_styles),
+			        dbc.Tab(get_tab2(), label="Negative Sentiment", tab_style = tab_styles),
 			        dbc.Tab(get_tab3(), label="Recent Sentiment Trends", tab_style = tab_styles),
 			        dbc.Tab(get_tab4(), label="Unemployment Rates", tab_style = tab_styles)
 			    ]
