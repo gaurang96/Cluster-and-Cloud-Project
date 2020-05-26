@@ -4,7 +4,6 @@ import dash
 import json
 import layout
 import callbacks
-import route_funcs
 import database
 
 # data stores
@@ -24,7 +23,11 @@ app = dash.Dash(
 app.layout = layout.get_layout()
 
 # invoke callbacks 
+callbacks.positive_callback(app, 't-val', 'n_clicks', 'positive-chart')
+callbacks.negative_callback(app, 't-val', 'n_clicks', 'negative-chart')
+callbacks.trend_callback(app, 't-val', 'n_clicks', 'trends-chart')
 callbacks.unemp_callback(app, 't-val', 'n_clicks', 'unemployment-chart')
+
 
 def dump_data(database, idx):
 	view_data = database.collect_data(idx)

@@ -27,9 +27,8 @@ def get_sidePanel():
 	return dbc.Col(
                     [
                         # Callback Input
-                        dbc.Row(children = "click 'go' to get the data from couchdb", style = {'color': '#292F33', 'padding-bottom': '10px', 'padding-left' : '10px'}),
-                        dbc.Row(dbc.Button('Get Aurin Data', color='primary', id='a-val', n_clicks=0), style = {'padding-bottom': '10px', 'padding-left' : '10px'}),
-                        dbc.Row(dbc.Button('Get Twitter Data', color='primary', id='t-val', n_clicks=0), style = {'padding-bottom': '10px', 'padding-left' : '10px'}),
+                        dbc.Row(children = "click to get data from couchdb", style = {'color': '#292F33', 'padding-bottom': '10px', 'padding-left' : '10px'}),
+                        dbc.Row(dbc.Button('Connect to Database', color='primary', id='t-val', n_clicks=0, block = True), style = {'padding-bottom': '10px', 'padding-left' : '10px', 'padding-right': '10px'}),
                         dbc.Row(html.Div(children = context, style = {'color': '#292F33', 'padding-bottom': '10px', 'padding-left' : '10px'}))
 
                     ],
