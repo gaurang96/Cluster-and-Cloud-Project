@@ -14,6 +14,8 @@ db = database.database(ip, user, pw)
 db.connect()
 
 # app and server
+host ='127.0.0.1' # '172.26.134.13'
+port = '8050' #'3000'
 server = flask.Flask(__name__)
 app = dash.Dash(
     __name__,
@@ -24,10 +26,10 @@ app = dash.Dash(
 app.layout = layout.get_layout()
 
 # invoke callbacks 
-callbacks.positive_callback(app, 't-val', 'n_clicks', 'positive-chart')
-callbacks.negative_callback(app, 't-val', 'n_clicks', 'negative-chart')
-callbacks.trend_callback(app, 't-val', 'n_clicks', 'trends-chart')
-callbacks.unemp_callback(app, 't-val', 'n_clicks', 'unemployment-chart')
+callbacks.positive_callback(app, 't-val', 'n_clicks', 'positive-chart', host, port)
+callbacks.negative_callback(app, 't-val', 'n_clicks', 'negative-chart', host, port)
+callbacks.trend_callback(app, 't-val', 'n_clicks', 'trends-chart', host, port)
+callbacks.unemp_callback(app, 't-val', 'n_clicks', 'unemployment-chart', host, port)
 
 
 def dump_data(database, idx):
@@ -67,4 +69,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(port = port , host = host, debug=False)

@@ -6,7 +6,7 @@ pip install -r Cluster-and-Cloud-Project/UI/requirements.txt
 
 python Cluster-and-Cloud-Project/UI/dash_files/app.py
 
-the app will be accessible on http://127.0.0.1:8050/app/
+the app will be accessible on http://172.26.134.13:3000/app/
 
 
 A quick rundown of the files and their roles:
