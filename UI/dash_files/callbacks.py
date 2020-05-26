@@ -1,7 +1,6 @@
 import dash
 from dash.dependencies import Input, Output
 import requests
-import numpy as np
 
 # callback for each interactive function
 #requests are used to interact with the GET calls from the api
@@ -11,25 +10,25 @@ def unemp_callback(app, in_id, in_type, out_id):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Unemployment Rates", 'xaxis': {'title': 'Victoiran LGAs'}, 'yaxis': {'title', 'Unemployment Rate (%)'}}
+		layout = {'title': "Unemployment Rates", 'xaxis': {'title': 'Victoiran LGAs'}, 'yaxis': {'title': 'Unemployment Rate (%)'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 
 		if event > 0:
 			unemp = requests.get('http://127.0.0.1:8050/api/unemployment').json()
-			data = [{'x' : list(unemp['city'].values()), 'y': list(unemp['unemployment_rate'].values()), 'type' : 'bar'}]
+			data = [{'x' : list(unemp['city'].values()), 'y': list(unemp['unemployment_rate'].values()),
+					 'type' : 'bar', 'marker' : {'color': '#55ACEE'}}]
 			
-
 		return {'data': data, 'layout': layout}
 
 def trend_callback(app, in_id, in_type, out_id):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Historic Trend Line"}
+		layout = {'title': "Change in Happiness Index", 'xaxis': {'title': 'Date'}, 'yaxis': {'title': 'Positve Tweets Difference'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 		
 		if event > 0:
 			trends = requests.get('http://127.0.0.1:8050/api/trend').json()
-			data = [{'x' : list(trends['positive_neutral_negative'].keys()), 'y': list(trends['positive_neutral_negative'].values()), 'type' : 'line'}]
-			
+			data = [{'x' : ['May-17','May-18','May-19','May-20','May-21','May-22','May-23','May-24','May-25'], 'y': list(trends['positive_neutral_negative'].values()),
+					 'type' : 'line', 'marker' : {'color': '#55ACEE'}}]	
 
 		return {'data': data, 'layout': layout}
 
@@ -37,7 +36,7 @@ def positive_callback(app, in_id, in_type, out_id, x = 25):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Suburbs with the Most Positive Sentiments", 'xaxis_title': 'Suburbs and Cities of Victoria', 'yaxis_title': 'Twitter Sentiment Ratio'}
+		layout = {'title': "Suburbs with the Most Positive Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 
 		if event > 0:
 			pos = requests.get('http://127.0.0.1:8050/api/positive').json()
@@ -53,7 +52,7 @@ def negative_callback(app, in_id, in_type, out_id, x = 25):
 	@app.callback(Output(out_id, 'figure'), [Input(in_id, in_type)])
 	def graph_update(event):
 		data = [{'x': [], 'y' : []}]
-		layout = {'title': "Suburbs with the Most Negatve Sentiments", 'xaxis_title': 'Suburbs and Cities of Victoria', 'yaxis_title': 'Twitter Sentiment Ratio'}
+		layout = {'title': "Suburbs with the Most Negatve Sentiments", 'xaxis': {'title': 'Cities and Suburbs'}, 'yaxis': {'title': 'Sentiment Ratio'}, 'paper_bgcolor' : 'rgba(0,0,0,0)', 'plot_bgcolor' : 'rgba(0,0,0,0)'}
 
 		if event > 0:
 			neg = requests.get('http://127.0.0.1:8050/api/negative').json()

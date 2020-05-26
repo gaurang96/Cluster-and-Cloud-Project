@@ -20,5 +20,3 @@ tabs - contains the structure and elements of each tab
 callbacks - functions that allow for interactive updating of elements in the app (optional)
 
 database - database class for handling couchdb
-
-route_funcs - functions that allow for data retrieval at server endpoints

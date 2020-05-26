@@ -12,6 +12,7 @@ user = "admin"
 pw = "123"
 db = database.database(ip, user, pw)
 db.connect()
+
 # app and server
 server = flask.Flask(__name__)
 app = dash.Dash(
@@ -40,6 +41,10 @@ def dump_data(database, idx):
 def index():
     return "Hello World"
 
+@server.route('/api/')
+def api_home():
+    return "This is has been intentionally left blank"
+
 @server.route('/api/positive', methods=['GET'])
 def get_pos(db = db):
 	return dump_data(db, 0)
@@ -62,4 +67,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
