@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[ ]:
-
-
 def map_function1(arrays):
     #print(arrays)
     formats = '%a %b %d %H:%M:%S %z %Y'
@@ -26,7 +20,6 @@ time_series=(database_timeseries.get_view_result('_design/view_date', 'view_date
 
 zip_file = map(map_function1, time_series['rows'])
 #print(list(zip_file))
-time_series_dataframe = pd.DataFrame(list(zip_file), columns=['date', 'datewise_sentiment'])
+time_series_dataframe = pd.DataFrame(list(zip_file), columns=['date', 'positive_neutral_negative'])
 
-time_series_dataframe_json = json.loads(time_series_dataframe.groupby('date').agg('count').to_json())['datewise_sentiment']
-
+time_series_dataframe_json = json.loads(time_series_dataframe.groupby('date').agg('count').to_json())
