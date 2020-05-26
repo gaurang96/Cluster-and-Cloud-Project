@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import tabs
 
 
-context = "This Application provides a series of visualisations that help encapsulate the relationship of Unemployment in Victoria and Twitter Sentiment within the context of Covid-19"
+context = "This Application provides a series of visualisations that help encapsulate the relationship of Unemployment in Victoria and Twitter Sentiment within the context of Covid-19."
 github = "The code for this assignment can be found at:"
 link = html.A(href = "https://github.com/gaurang96/Cluster-and-Cloud-Project" , children = "https://github.com/gaurang96/Cluster-and-Cloud-Project", style = {'color': '#FFFFFF'})
 
@@ -29,7 +29,7 @@ def get_sidePanel():
 	return dbc.Col(
                     [
                         # Callback Input
-                        dbc.Row(children = "click to get data from couchdb", style = {'color': '#CCD6DD', 'padding-bottom': '10px', 'padding-left' : '10px', 'padding-top': '50px'}),
+                        dbc.Row(children = "Click to get data from couchdb.", style = {'color': '#CCD6DD', 'padding-bottom': '10px', 'padding-left' : '10px', 'padding-top': '50px'}),
                         dbc.Row(dbc.Button('Connect to Database', color='primary', id='t-val', n_clicks=0, block = True), style = {'padding-bottom': '50px', 'padding-left' : '10px', 'padding-right': '10px'}),
                         dbc.Row(html.Div(children = context, style = {'color': '#CCD6DD', 'padding-bottom': '50px', 'padding-left' : '10px', 'padding-right': '10px'})),
                         dbc.Row(html.Div(children = github, style = {'color': '#CCD6DD', 'padding-left' : '10px', 'padding-right': '10px'})),
