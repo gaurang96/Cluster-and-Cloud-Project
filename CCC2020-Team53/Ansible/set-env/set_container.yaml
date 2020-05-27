@@ -1,0 +1,26 @@
+- hosts: all
+  gather_facts: false
+
+  roles:
+    - role: common
+    - role: docker 
+    - role: mount-volume    
+    
+- hosts: all
+  gather_facts: false
+
+  roles:
+    - role: install-dependencies
+
+- hosts: Couchdb_master
+  gather_facts: false
+
+  roles:
+    - master
+    - git 
+
+- hosts: Couchdb_slave1
+  gather_facts: false
+
+  roles:
+    - slave1

@@ -1,0 +1,47 @@
+
+"""
+Created on Wed May 27 01:31:38 2020
+Team 53
+Melbourne
+@author: Sania Khan(1045290), Kanav Sood(1057606), Gaurang Sharma(1041953), Udit Goel(1042890), Jack Crellin(1168062)
+"""
+
+#!/usr/bin/env python
+# coding: utf-8
+
+import json
+import couchdb
+
+input_file = open ('DJSB_Small_Area_Labour_Market_-_Unemployment_LGA_2010-2018\\data339665453891726871.json')
+json_array = json.load(input_file)
+store_list = []
+couch = couchdb.Server("http://user:123@172.26.132.96:5984/")  
+
+db = couch['aurin']
+
+for item in json_array['features']:
+    store_details = {"name":None, "city":None}
+    store_details['id'] = item['id']
+    store_details['props'] = item['properties']
+    db.save(store_details)
+
+print(store_details)
+
+from cloudant.client import Cloudant
+from cloudant.error import CloudantException
+from cloudant.result import Result, ResultByKey
+from cloudant import design_document
+serviceUsername = "user"
+servicePassword = "123"
+serviceURL = "http://user:123@172.26.132.96:5984/"
+
+client = Cloudant(serviceUsername, servicePassword, url=serviceURL)
+client.connect()
+my_database = client['aurin']
+ddoc = design_document.DesignDocument(my_database,document_id='view')
+ddoc.add_view('myview',"""function (doc) {
+  if(doc.props.lga_name18=="Melbourne (C)" || doc.props.lga_name=="Melbourne (C)"){
+  emit(doc.id, doc);
+  }
+}""",'_count')
+ddoc.save()

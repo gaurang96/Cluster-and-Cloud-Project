@@ -1,0 +1,30 @@
+#Team 53
+#Melbourne
+#@author: Sania Khan(1045290), Kanav Sood(1057606), Gaurang Sharma(1041953), Udit Goel(1042890), Jack Crellin(1168062)
+
+- copy: 
+    src: ~/.ssh/id_rsa.pub 
+    dest: /home/ubuntu/.ssh
+
+- copy: 
+    src: ~/.ssh/id_rsa
+    dest: /home/ubuntu/.ssh
+
+- copy: 
+    src: ~/.ssh/config
+    dest: /home/ubuntu/.ssh
+
+- git:
+    repo: git@github.com:gaurang96/Cluster-and-Cloud-Project.git
+    dest: /home/ubuntu/project
+    key_file: /home/ubuntu/.ssh/id_rsa
+    accept_hostkey: yes
+  become: yes
+  
+- name: set the python version
+  raw: echo "alias python=python3" >> ~/.bash_aliases; source ~/.bash_aliases
+
+- name: Run a script for running web app
+  script: /home/ubuntu/project/UI/dash_files/app.py
+  args:
+    executable: python3
