@@ -7,5 +7,5 @@ dash_bootstrap_components==0.10.0
 plotly==4.7.1
 flask==1.1.2
 cloudant==2.13.0
-requests==2.18.4
+requests==2.20.0
 gunicorn==20.0.4
