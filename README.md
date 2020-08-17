@@ -21,6 +21,34 @@ This figure above now shows the overall net difference of positive and negative 
 
 The Final Figure visualizes the most recent unemployment data from various regions in Victoria. From this it can be gathered that the rates of unemployment have traditionally been higher in more regional areas of Victoria, as the city of Melbourne has by far the lowest unemployment rate of those present.
 
+## User Guide for the Software Application
+# Ansible Folder
+1. Under nectar folder run the run-nectar.sh sudo ./run-nectar.sh to create instances, volume, security groups.
+2. Under set-env folder run sudo ./run-container.sh to create docker image, container, mount volume, install dependencies, install CouchDB.
+3. Under web-app run sudo ./run-web-app.sh to host the web app on the instance.
+(Using Windows, the command dos2unix is used for the conversion of sh file before running the sudo ./run-nectar.sh.)
+
+# Harvester Folder
+The code for the harvester and web app is cloned from the git repository1. The scheduler in set-env will run the harvester.py after 30 minutes. historic_tweets.py is used to fetch the historic tweets.
+
+# web_app Folder
+To run web app locally on your machine the following lines should be all that's needed.
+pip install -r Cluster-and-Cloud-Project/UI/requirements.txt
+python Cluster-and-Cloud-Project/UI/dash_files/app.py
+the app will be accessible on http://172.26.134.13:3000/app/
+A quick rundown of the files and their roles:
+app - creates and deploys the server+app (main file)
+layout - contains the overall structure and design of the app
+tabs - contains the structure and elements of each tab
+call-backs - functions that allow for interactive updating of elements in the app (optional)
+database - database class for handling couchDB
+
+# Aurin Folder
+This contains the data set used from Aurin website by downloading in JSON format.
+
+# CouchDB Views Folder
+All the views made using map reduce feature of CouchDB are mentioned under the folder. Charts, plots shown in front end are dynamically loaded by calling these views from the front-end application.
+
 
 
 
