@@ -13,3 +13,9 @@ In figure above, the positive and negative sentiment ratios of the 25 administra
 
 In figure above, the reverse of the previous is shown and the sentiment ratios of the administrative areas with the greatest negative sentiments are shown. The negativity is not as great as in the prior graph, as no value exceeds 0.5. Interestingly, two of the three areas with the greatest negativity have equal positivity. Another contrast to the prior chart is that there are a larger proportion of regional administrative areas.
 
+![Screenshot 2020-08-17 at 1 23 47 PM](https://user-images.githubusercontent.com/40225761/90354526-eded0c00-e08c-11ea-969e-0ba49a42484e.png)
+
+This figure above now shows the overall net difference of positive and negative tweets each day or a “happiness index”. Positive values indicate that there is stronger positive sentiment and negative values indicate stronger negative sentiment. Based on the current results, it can be seen that there has been consistent positive sentiment online. Moreover, this net difference appears to be increasing every day.
+
+
+
