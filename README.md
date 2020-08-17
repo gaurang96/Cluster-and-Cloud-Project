@@ -17,5 +17,11 @@ In figure above, the reverse of the previous is shown and the sentiment ratios o
 
 This figure above now shows the overall net difference of positive and negative tweets each day or a “happiness index”. Positive values indicate that there is stronger positive sentiment and negative values indicate stronger negative sentiment. Based on the current results, it can be seen that there has been consistent positive sentiment online. Moreover, this net difference appears to be increasing every day.
 
+![Screenshot 2020-08-17 at 1 25 15 PM](https://user-images.githubusercontent.com/40225761/90354615-28ef3f80-e08d-11ea-993d-b237e97f4cfc.png)
+
+The Final Figure visualizes the most recent unemployment data from various regions in Victoria. From this it can be gathered that the rates of unemployment have traditionally been higher in more regional areas of Victoria, as the city of Melbourne has by far the lowest unemployment rate of those present.
+
+
+
 
 
