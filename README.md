@@ -9,3 +9,7 @@ The primary goal was to investigate the sentiment of local twitter users in part
 
 In figure above, the positive and negative sentiment ratios of the 25 administrative areas with the greatest positive sentiments are shown. All areas are overwhelmingly positive with minimal negativity. The majority of these regions are within the metropolitan area of Melbourne and there seems to be some regional clustering. For example, Hughesdale, Oakliegh, Oakliegh East and Huntingdale are all suburbs that are immediately adjacent.
 
+![Screenshot 2020-08-17 at 1 21 48 PM](https://user-images.githubusercontent.com/40225761/90354468-b8e0b980-e08c-11ea-9483-4a7b8bd709c3.png)
+
+In figure above, the reverse of the previous is shown and the sentiment ratios of the administrative areas with the greatest negative sentiments are shown. The negativity is not as great as in the prior graph, as no value exceeds 0.5. Interestingly, two of the three areas with the greatest negativity have equal positivity. Another contrast to the prior chart is that there are a larger proportion of regional administrative areas.
+
